@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="fiberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+  </defs>
+  <rect width="240" height="180" rx="16" fill="#eff6ff" />
+  <path d="M20 140 C 80 140, 100 60, 220 60" fill="none" stroke="url(#fiberGrad)" stroke-width="6" stroke-linecap="round" />
+  <circle cx="60" cy="115" r="8" fill="#3b82f6" />
+  <circle cx="150" cy="80" r="6" fill="#60a5fa" />
+  <path d="M180 110 L210 110 L195 130 Z" fill="#2563eb" opacity="0.8" />
+</svg>

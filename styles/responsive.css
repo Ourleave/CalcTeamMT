@@ -1,0 +1,278 @@
+@media (max-width: 1050px) {
+  .quick-tools-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "calculator"
+      "result"
+      "splitter"
+      "history"
+      "support";
+  }
+
+  .support-banner {
+    min-height: 170px;
+  }
+
+  .result-page-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  body {
+    padding-bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom));
+  }
+
+  .sidebar {
+    z-index: 120;
+    width: min(280px, 82vw);
+    transform: translateX(-105%);
+    box-shadow: var(--shadow-lg);
+    transition: transform 220ms ease;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .drawer-close {
+    display: inline-grid;
+  }
+
+  .drawer-overlay {
+    position: fixed;
+    z-index: 110;
+    inset: 0;
+    background: rgba(8, 28, 57, 0.42);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 220ms ease;
+  }
+
+  .drawer-overlay.visible {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .main-content {
+    width: 100%;
+    min-height: auto;
+    margin-left: 0;
+    padding: 12px 14px 20px;
+  }
+
+  .desktop-header {
+    display: none;
+  }
+
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 45px;
+    margin-bottom: 13px;
+  }
+
+  .mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    background: transparent;
+    text-align: left;
+  }
+
+  .bottom-navigation {
+    position: fixed;
+    z-index: 100;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    min-height: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom));
+    padding: 6px 6px calc(6px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface) 93%, transparent);
+    backdrop-filter: blur(16px);
+  }
+
+  .bottom-nav-item {
+    display: grid;
+    place-items: center;
+    gap: 2px;
+    border-radius: 9px;
+    background: transparent;
+    color: var(--text-light);
+  }
+
+  .bottom-nav-item span {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .bottom-nav-item small {
+    font-size: 8px;
+    font-weight: 700;
+  }
+
+  .bottom-nav-item.active {
+    color: var(--primary);
+  }
+
+  .hero-banner {
+    min-height: 142px;
+    border-radius: 12px;
+  }
+
+  .hero-copy {
+    max-width: 65%;
+    padding: 18px 15px;
+  }
+
+  .hero-copy h1 {
+    font-size: 18px;
+  }
+
+  .hero-copy p {
+    font-size: 10px;
+  }
+
+  .hero-illustration {
+    right: -18px;
+    width: 57%;
+    opacity: 0.76;
+  }
+
+  .quick-tools-section {
+    gap: 8px;
+  }
+
+  .quick-tool-card {
+    min-height: 78px;
+    padding: 10px;
+  }
+
+  .quick-tool-card > b {
+    display: none;
+  }
+
+  .quick-tool-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 15px;
+  }
+
+  .calculator-panel,
+  .result-summary-panel,
+  .splitter-preview-panel,
+  .mini-history-panel {
+    padding: 13px;
+  }
+
+  .panel-heading.with-action {
+    display: block;
+  }
+
+  .mode-switcher {
+    width: 100%;
+    margin-top: 11px;
+  }
+
+  .mode-button {
+    flex: 1;
+  }
+
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .result-overview {
+    grid-template-columns: 120px 1fr;
+  }
+
+  .gauge-wrap {
+    min-height: 125px;
+  }
+
+  .signal-gauge {
+    width: 125px;
+  }
+
+  .gauge-value {
+    top: 42px;
+  }
+
+  .page-title {
+    margin-top: 4px;
+  }
+
+  .mobile-calculator-slot .calculator-panel {
+    display: block;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+  }
+
+  .data-table {
+    min-width: 400px;
+  }
+
+  .reference-search {
+    width: 100%;
+    margin-bottom: 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .quick-tool-card strong {
+    font-size: 10px;
+  }
+
+  .quick-tool-card small {
+    font-size: 8px;
+  }
+
+  .form-grid {
+    gap: 9px 8px;
+  }
+
+  .result-overview {
+    grid-template-columns: 105px 1fr;
+  }
+
+  .signal-gauge {
+    width: 112px;
+  }
+}
+
+@media (max-width: 720px) {
+  .result-main-card {
+    min-height: 250px;
+  }
+
+  .result-main-card .gauge-wrap {
+    transform: scale(1.15);
+    margin-bottom: 25px;
+  }
+
+  .color-reference-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .mobile-calculator-slot {
+    display: block;
+  }
+
+  .mobile-calculator-slot .calculator-panel {
+    margin-bottom: 0;
+  }
+}
+
+

@@ -1,0 +1,157 @@
+.app-shell {
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: fixed;
+  z-index: 50;
+  inset: 0 auto 0 0;
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-width);
+  padding: 18px 10px 16px;
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 8px 22px;
+}
+
+.sidebar-brand strong,
+.mobile-brand strong {
+  display: block;
+  color: var(--text-strong);
+  font-size: 14px;
+  line-height: 1.1;
+}
+
+.sidebar-brand span,
+.mobile-brand small {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.brand-mark {
+  display: grid;
+  flex: 0 0 auto;
+  width: 29px;
+  height: 29px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+}
+
+.brand-mark svg {
+  width: 22px;
+  fill: currentColor;
+}
+
+.brand-mark.small {
+  width: 27px;
+  height: 27px;
+}
+
+.side-navigation {
+  display: grid;
+  gap: 4px;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+}
+
+.sidebar-footer > small {
+  display: block;
+  margin: 14px 8px 0;
+  color: var(--text-light);
+  font-size: 10px;
+}
+
+.main-content {
+  width: calc(100% - var(--sidebar-width));
+  max-width: calc(var(--content-max-width) + var(--sidebar-width));
+  min-height: 100vh;
+  margin-left: var(--sidebar-width);
+  padding: 16px 28px 40px;
+}
+
+.desktop-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+  margin-bottom: 16px;
+}
+
+.header-profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.header-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+}
+
+.mobile-header,
+.bottom-navigation {
+  display: none;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.62fr) minmax(280px, 0.83fr);
+  grid-template-areas:
+    "calculator result"
+    "splitter result"
+    "history support";
+  gap: 12px;
+  align-items: start;
+}
+
+.calculator-panel {
+  grid-area: calculator;
+}
+
+.result-summary-panel {
+  grid-area: result;
+}
+
+.splitter-preview-panel {
+  grid-area: splitter;
+}
+
+.mini-history-panel {
+  grid-area: history;
+}
+
+.support-banner {
+  grid-area: support;
+}
+
+.result-page-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.85fr) minmax(320px, 1.15fr);
+  gap: 14px;
+}
+
+.result-page-grid .success-note {
+  grid-column: 1 / -1;
+}
+
+.drawer-overlay {
+  display: none;
+}
+
+

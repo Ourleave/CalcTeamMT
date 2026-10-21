@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+  <meta name="theme-color" content="#ffffff">
+  <meta
+    name="description"
+    content="CalcTeamMT Pro — Toolkit kalkulator dan referensi teknisi FTTH."
+  >
+
+  <title>CalcTeamMT Pro — FTTH Toolkit</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+</head>
+
+<body>
+  <div id="toast-root" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Overlay untuk mobile menu -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+
+  <div class="app-shell">
+
+    <!-- =====================
+      SIDEBAR DESKTOP / DRAWER MOBILE
+    ====================== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M12.6 2.6 4.2 11l8.4 8.4 2.1-2.1-6.3-6.3 6.3-6.3-2.1-2.1Z"></path>
+            <path d="M18.2 7.2 13.4 12l4.8 4.8 1.6-1.6-3.2-3.2 3.2-3.2-1.6-1.6Z"></path>
+          </svg>
+        </div>
+
+        <div>
+          <strong>CalcTeamMT Pro</strong>
+          <span>FTTH Toolkit</span>
+        </div>
+
+        <button
+          class="icon-button drawer-close"
+          id="drawer-close"
+          aria-label="Tutup menu"
+        >
+          ×
+        </button>
+      </div>
+
+      <nav class="side-navigation" aria-label="Navigasi utama">
+        <button class="side-nav-item active" data-route="home">
+          <span class="nav-icon">⌂</span>
+          <span>Beranda</span>
+        </button>
+
+        <button class="side-nav-item" data-route="result">
+          <span class="nav-icon">⌁</span>
+          <span>Hasil</span>
+        </button>
+
+        <button class="side-nav-item" data-route="splitter-table">
+          <span class="nav-icon">▤</span>
+          <span>Tabel Splitter</span>
+        </button>
+
+        <button class="side-nav-item" data-route="reference">
+          <span class="nav-icon">▤</span>
+          <span>Referensi</span>
+        </button>
+
+        <button class="side-nav-item" data-route="history">
+          <span class="nav-icon">◷</span>
+          <span>Riwayat</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="side-nav-item" data-route="settings">
+          <span class="nav-icon">⚙</span>
+          <span>Pengaturan</span>
+        </button>
+
+        <button class="side-nav-item" id="help-button">
+          <span class="nav-icon">?</span>
+          <span>Bantuan</span>
+        </button>
+
+        <div class="support-card">
+          <span class="support-icon">⌁</span>
+          <div>
+            <strong>Dukungan Teknis FTTH</strong>
+            <p>Tools untuk jaringan yang lebih baik.</p>
+          </div>
+        </div>
+
+        <small>v1.0.0</small>
+      </div>
+    </aside>
+
+    <!-- =====================
+      KONTEN UTAMA
+    ====================== -->
+    <main class="main-content">
+
+      <!-- Header desktop -->
+      <header class="desktop-header">
+        <label class="search-field">
+          <span>⌕</span>
+          <input
+            id="global-search"
+            type="search"
+            placeholder="Cari alat, fitur, atau referensi..."
+            autocomplete="off"
+          >
+        </label>
+
+        <div class="header-profile">
+          <span class="connection-status">⌁</span>
+          <span id="header-date">Sel, 27 Mei 2025 · 14:32</span>
+          <span class="header-divider"></span>
+
+          <button class="profile-trigger" data-route="settings">
+            <span class="avatar">T</span>
+            <span>Teknisi FTTH</span>
+            <span>⌄</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Header mobile -->
+      <header class="mobile-header">
+        <button class="mobile-brand" id="drawer-open" aria-label="Buka menu">
+          <span class="brand-mark small">❮</span>
+          <span>
+            <strong>CalcTeamMT Pro</strong>
+            <small>FTTH Toolkit</small>
+          </span>
+        </button>
+
+        <button
+          class="icon-button"
+          id="theme-toggle-mobile"
+          aria-label="Ganti mode tampilan"
+        >
+          ◔
+        </button>
+      </header>
+
+      <!-- =====================
+        VIEW: BERANDA
+      ====================== -->
+      <section class="page-view active" id="view-home">
+        <div class="hero-banner">
+          <div class="hero-copy">
+            <span>Selamat datang di</span>
+            <h1>CalcTeamMT Pro</h1>
+            <p>
+              Toolkit lengkap untuk teknisi FTTH. Hitung, analisis,
+              dan pastikan jaringan fiber optik Anda selalu optimal.
+            </p>
+          </div>
+
+          <img
+            class="hero-illustration"
+            src="assets/images/fiber-hero.svg"
+            alt=""
+          >
+        </div>
+
+        <section class="quick-tools-section">
+          <button class="quick-tool-card" data-route="calculator">
+            <span class="quick-tool-icon">▦</span>
+            <span>
+              <strong>Kalkulator Redaman</strong>
+              <small>Prediksi daya output & analisis redaman</small>
+            </span>
+            <b>›</b>
+          </button>
+
+          <button class="quick-tool-card" data-reference="budget-link">
+            <span class="quick-tool-icon">⌁</span>
+            <span>
+              <strong>Budget Link</strong>
+              <small>Hitung margin daya jaringan FTTH</small>
+            </span>
+            <b>›</b>
+          </button>
+
+          <button class="quick-tool-card" data-reference="distance">
+            <span class="quick-tool-icon">●</span>
+            <span>
+              <strong>Estimasi Jarak</strong>
+              <small>Perkiraan jarak maksimal berdasarkan redaman</small>
+            </span>
+            <b>›</b>
+          </button>
+
+          <button class="quick-tool-card" data-route="reference">
+            <span class="quick-tool-icon">▤</span>
+            <span>
+              <strong>Referensi</strong>
+              <small>6 kategori informasi teknisi FTTH</small>
+            </span>
+            <b>›</b>
+          </button>
+        </section>
+
+        <div class="dashboard-grid">
+          <!-- Kalkulator utama -->
+          <section class="panel calculator-panel">
+            <div class="panel-heading with-action">
+              <div>
+                <h2><span class="heading-icon">⌁</span> Kalkulator Redaman</h2>
+                <p>Masukkan parameter untuk menghitung prediksi daya output atau memeriksa hasil pengukuran.</p>
+              </div>
+
+              <div class="mode-switcher" role="tablist">
+                <button class="mode-button active" data-mode="prediction">
+                  Prediksi Output
+                </button>
+                <button class="mode-button" data-mode="measurement">
+                  Hasil Pengukuran
+                </button>
+              </div>
+            </div>
+
+            <form id="calculator-form" novalidate>
+              <div class="form-grid">
+                <label class="field-group">
+                  <span>Daya Input (dBm)</span>
+                  <input id="input-power" type="number" value="0" step="0.1" inputmode="decimal">
+                </label>
+
+                <label class="field-group">
+                  <span>Jenis Splitter</span>
+                  <select id="splitter-type"></select>
+                </label>
+
+                <label class="field-group">
+                  <span>Jumlah Splice</span>
+                  <input id="splice-count" type="number" value="2" min="0" step="1" inputmode="numeric">
+                </label>
+
+                <label class="field-group">
+                  <span>Panjang Kabel (km)</span>
+                  <input id="fiber-length" type="number" value="1.5" min="0" step="0.1" inputmode="decimal">
+                </label>
+
+                <label class="field-group">
+                  <span>Loss Konektor (dB)</span>
+                  <input id="connector-loss" type="number" value="0.5" min="0" step="0.1" inputmode="decimal">
+                </label>
+
+                <label class="field-group">
+                  <span>Loss Lainnya (dB)</span>
+                  <input id="other-loss" type="number" value="0" min="0" step="0.1" inputmode="decimal">
+                </label>
+              </div>
+
+              <div class="formula-box">
+                <span>ⓘ</span>
+                <p>
+                  <strong>Rumus:</strong>
+                  P<sub>out</sub> = P<sub>in</sub> −
+                  (Loss splitter + Loss splice + Loss serat + Loss konektor + Loss lainnya)
+                </p>
+              </div>
+
+              <button class="primary-button" type="submit">
+                <span>▦</span>
+                Hitung Sekarang
+              </button>
+            </form>
+          </section>
+
+          <!-- Hasil desktop -->
+          <section class="panel result-summary-panel">
+            <div class="panel-heading">
+              <div>
+                <h2><span class="heading-icon">⌁</span> Hasil Perhitungan</h2>
+              </div>
+              <small id="last-updated">Terakhir diperbarui: —</small>
+            </div>
+
+            <div class="result-overview">
+              <div class="gauge-wrap">
+                <svg class="signal-gauge" viewBox="0 0 150 90" aria-label="Indikator kualitas sinyal">
+                  <path class="gauge-track" d="M 18 75 A 57 57 0 0 1 132 75"></path>
+                  <path class="gauge-progress" id="gauge-progress" d="M 18 75 A 57 57 0 0 1 132 75"></path>
+                </svg>
+
+                <div class="gauge-value">
+                  <strong id="result-power">-18.7</strong>
+                  <span>dBm</span>
+                </div>
+
+                <span class="status-pill normal" id="result-status">Normal</span>
+              </div>
+
+              <div class="result-metrics">
+                <div>
+                  <span>Daya Output</span>
+                  <strong id="metric-output">-18.7 dBm</strong>
+                </div>
+                <div>
+                  <span>Margin</span>
+                  <strong id="metric-margin">6.3 dB</strong>
+                </div>
+                <div>
+                  <span>Status</span>
+                  <strong id="metric-status" class="metric-status normal">Normal</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="loss-breakdown">
+              <h3>Rincian Redaman</h3>
+              <div id="loss-breakdown-list"></div>
+              <div class="loss-total">
+                <strong>Total Redaman</strong>
+                <strong id="total-loss">15.5 dB</strong>
+              </div>
+            </div>
+          </section>
+
+          <!-- Table splitter -->
+          <section class="panel splitter-preview-panel">
+            <div class="panel-heading">
+              <div>
+                <h2><span class="heading-icon">▤</span> Perbandingan Splitter</h2>
+                <p>Lihat perbandingan nilai loss dan output untuk berbagai jenis splitter.</p>
+              </div>
+            </div>
+
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Tipe Splitter</th>
+                    <th>Loss (dB)</th>
+                    <th>Output (dBm)</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="splitter-preview-body"></tbody>
+              </table>
+            </div>
+
+            <button class="text-button" data-route="splitter-table">
+              Lihat semua tipe splitter <span>→</span>
+            </button>
+          </section>
+
+          <!-- Mini history -->
+          <section class="panel mini-history-panel">
+            <div class="panel-heading with-link">
+              <div>
+                <h2><span class="heading-icon">◷</span> Riwayat Terakhir</h2>
+              </div>
+              <button class="text-button small" data-route="history">Lihat semua →</button>
+            </div>
+
+            <div id="mini-history-list" class="history-list"></div>
+          </section>
+
+          <!-- Tip card -->
+          <aside class="support-banner">
+            <span class="support-banner-icon">⌁</span>
+            <h3>Jaga kualitas jaringan FTTH Anda</h3>
+            <p>
+              Perhitungan yang akurat membantu meminimalkan gangguan
+              dan memastikan layanan tetap stabil.
+            </p>
+            <button class="secondary-button" data-route="reference">
+              ▤ Lihat Panduan
+            </button>
+            <img src="assets/images/ftth-support.svg" alt="">
+          </aside>
+        </div>
+      </section>
+
+      <!-- =====================
+        VIEW: KALKULATOR MOBILE / FULL
+      ====================== -->
+      <section class="page-view" id="view-calculator">
+        <div class="page-title">
+          <button class="back-button" data-route="home">‹</button>
+          <div>
+            <h1>Kalkulator Redaman</h1>
+            <p>Prediksi output dan hasil pengukuran</p>
+          </div>
+        </div>
+
+        <div class="mobile-calculator-slot" id="mobile-calculator-slot"></div>
+      </section>
+
+      <!-- =====================
+        VIEW: HASIL
+      ====================== -->
+      <section class="page-view" id="view-result">
+        <div class="page-title">
+          <button class="back-button" data-route="home">‹</button>
+          <div>
+            <h1>Hasil Perhitungan</h1>
+            <p>Analisis daya dan redaman jaringan</p>
+          </div>
+        </div>
+
+        <div class="result-page-grid">
+          <div class="panel result-main-card">
+            <div id="result-page-gauge"></div>
+            <div class="result-details-list" id="result-page-details"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-heading">
+              <h2>Rincian Redaman</h2>
+            </div>
+            <div id="result-page-breakdown"></div>
+          </div>
+
+          <div class="success-note" id="result-recommendation"></div>
+        </div>
+      </section>
+
+      <!-- =====================
+        VIEW: TABEL SPLITTER
+      ====================== -->
+      <section class="page-view" id="view-splitter-table">
+        <div class="page-title">
+          <button class="back-button" data-route="home">‹</button>
+          <div>
+            <h1>Tabel Splitter</h1>
+            <p>Referensi loss dan daya output tiap port</p>
+          </div>
+        </div>
+
+        <div class="splitter-filter" id="splitter-filter"></div>
+
+        <section class="panel">
+          <div class="splitter-detail-header">
+            <div>
+              <h2 id="selected-splitter-name">Splitter 1:8</h2>
+              <p>Rincian daya untuk tiap port splitter.</p>
+            </div>
+            <span class="status-pill normal">Aktif</span>
+          </div>
+
+          <div class="splitter-stat-grid">
+            <div>
+              <span>Loss Total</span>
+              <strong id="splitter-detail-loss">10.5 dB</strong>
+            </div>
+            <div>
+              <span>Output per Port</span>
+              <strong id="splitter-detail-output">-10.5 dBm</strong>
+            </div>
+          </div>
+
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Port</th>
+                  <th>Loss (dB)</th>
+                  <th>Output (dBm)</th>
+                </tr>
+              </thead>
+              <tbody id="splitter-port-table"></tbody>
+            </table>
+          </div>
+
+          <div class="info-note">
+            <strong>ⓘ Catatan</strong>
+            <p>Nilai di atas merupakan nilai standar. Dapat berbeda tergantung merek dan tipe splitter.</p>
+          </div>
+        </section>
+      </section>
+
+      <!-- =====================
+        VIEW: REFERENSI
+      ====================== -->
+      <section class="page-view" id="view-reference">
+        <div class="page-title">
+          <button class="back-button" data-route="home">‹</button>
+          <div>
+            <h1>Referensi</h1>
+            <p>Informasi teknis untuk pekerjaan FTTH</p>
+          </div>
+        </div>
+
+        <label class="reference-search">
+          <span>⌕</span>
+          <input id="reference-search" type="search" placeholder="Cari referensi...">
+        </label>
+
+        <div class="reference-list" id="reference-list"></div>
+
+        <section class="reference-content" id="reference-content"></section>
+      </section>
+
+      <!-- =====================
+        VIEW: RIWAYAT
+      ====================== -->
+      <section class="page-view" id="view-history">
+        <div class="page-title">
+          <button class="back-button" data-route="home">‹</button>
+          <div>
+            <h1>Riwayat</h1>
+            <p>Perhitungan yang tersimpan di perangkat</p>
+          </div>
+        </div>
+
+        <div class="history-tabs">
+          <button class="active" data-history-filter="all">Semua</button>
+          <button data-history-filter="prediction">Prediksi</button>
+          <button data-history-filter="measurement">Pengukuran</button>
+        </div>
+
+        <div class="history-list full" id="full-history-list"></div>
+
+        <button class="danger-outline-button" id="clear-history-button">
+          Hapus seluruh riwayat
+        </button>
+      </section>
+
+      <!-- =====================
+        VIEW: PENGATURAN
+      ====================== -->
+      <section class="page-view" id="view-settings">
+        <div class="page-title">
+          <button class="back-button" data-route="home">‹</button>
+          <div>
+            <h1>Profil & Pengaturan</h1>
+            <p>Kelola preferensi aplikasi</p>
+          </div>
+        </div>
+
+        <section class="panel profile-card">
+          <span class="large-avatar">T</span>
+          <div>
+            <h2>Teknisi FTTH</h2>
+            <p>teknisi@ftth.id</p>
+          </div>
+        </section>
+
+        <section class="settings-list">
+          <button id="theme-toggle-setting">
+            <span>◔</span>
+            <span>Mode Tampilan</span>
+            <strong id="theme-label">Terang</strong>
+            <b>›</b>
+          </button>
+
+          <button>
+            <span>◉</span>
+            <span>Satuan</span>
+            <strong>dBm / dB</strong>
+            <b>›</b>
+          </button>
+
+          <button>
+            <span>♙</span>
+            <span>Profil Perangkat</span>
+            <strong>ONT Default</strong>
+            <b>›</b>
+          </button>
+
+          <button>
+            <span>▣</span>
+            <span>Penyimpanan</span>
+            <strong>Data lokal</strong>
+            <b>›</b>
+          </button>
+        </section>
+
+        <h3 class="settings-heading">Tentang Aplikasi</h3>
+
+        <section class="settings-list">
+          <button>
+            <span>⌁</span>
+            <span>CalcTeamMT Pro</span>
+            <strong>Versi 1.0.0</strong>
+            <b>›</b>
+          </button>
+        </section>
+      </section>
+
+    </main>
+
+    <!-- =====================
+      BOTTOM NAVIGATION MOBILE
+    ====================== -->
+    <nav class="bottom-navigation" aria-label="Navigasi mobile">
+      <button class="bottom-nav-item active" data-route="home">
+        <span>⌂</span>
+        <small>Beranda</small>
+      </button>
+
+      <button class="bottom-nav-item" data-route="result">
+        <span>⌁</span>
+        <small>Hasil</small>
+      </button>
+
+      <button class="bottom-nav-item" data-route="splitter-table">
+        <span>▤</span>
+        <small>Tabel</small>
+      </button>
+
+      <button class="bottom-nav-item" data-route="reference">
+        <span>▤</span>
+        <small>Referensi</small>
+      </button>
+
+      <button class="bottom-nav-item" data-route="history">
+        <span>◷</span>
+        <small>Riwayat</small>
+      </button>
+    </nav>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
+  

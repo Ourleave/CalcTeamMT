@@ -1,0 +1,26 @@
+{
+  "name": "CalcTeamMT Pro",
+  "short_name": "CalcTeamMT",
+  "description": "Toolkit teknisi FTTH — kalkulator redaman, link budget, referensi ONT dan fiber optik.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f7faff",
+  "theme_color": "#ffffff",
+  "lang": "id",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
