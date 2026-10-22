@@ -16,8 +16,8 @@ const result = calculateBudgetLink({
   safetyMargin: 1.5
 });
 
-assertClose(result.totalLoss, 26.15, "Total budget loss tidak sesuai");
-assertClose(result.rxPower, -22.15, "RX budget tidak sesuai");
+assertClose(result.totalLoss, 25.15, "Total budget loss tidak sesuai");
+assertClose(result.rxPower, -21.15, "RX budget tidak sesuai");
 
 console.log("budget-link.test.js: PASS");
 

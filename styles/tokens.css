@@ -42,6 +42,13 @@
     "Segoe UI", sans-serif;
 
   --transition: 180ms ease;
+
+  --sidebar-card-bg: linear-gradient(135deg, #173f72, #245892);
+  --avatar-bg: #143e76;
+  --hero-end: rgba(235, 244, 255, 0.85);
+  --btn-gradient: linear-gradient(135deg, #1781ff, #1268ed);
+  --soft-gradient: linear-gradient(145deg, #ecf6ff, #f7fbff);
+  --glow: rgba(48, 139, 255, 0.08);
 }
 
 [data-theme="dark"] {
@@ -70,3 +77,82 @@
   --shadow-lg: 0 20px 55px rgba(0, 0, 0, 0.28);
 }
 
+
+[data-theme="dark"] {
+  --hero-end: rgba(22, 119, 255, 0.12);
+  --soft-gradient: linear-gradient(145deg, #172a48, #1b3152);
+}
+
+/* ---------- Tema tambahan ---------- */
+[data-theme="ocean"] {
+  --primary: #14c8c8; --primary-dark: #0ea5a5;
+  --primary-soft: rgba(20, 200, 200, 0.16); --primary-soft-2: rgba(20, 200, 200, 0.08);
+  --bg: #071f27; --surface: #0f3a45; --surface-soft: #124553; --surface-muted: #165364;
+  --text: #d6f5f5; --text-strong: #effffe; --text-muted: #8cc3c8; --text-light: #62a0a8;
+  --border: #1d5663; --border-strong: #2a6e7c;
+  --success-soft: rgba(36, 191, 139, 0.16); --warning-soft: rgba(244, 166, 42, 0.16); --danger-soft: rgba(239, 91, 91, 0.16);
+  --sidebar-card-bg: linear-gradient(135deg, #0b6670, #14a3a8);
+  --avatar-bg: #0b6670; --hero-end: rgba(20, 200, 200, 0.14);
+  --btn-gradient: linear-gradient(135deg, #19d3d3, #0e9a9f);
+  --soft-gradient: linear-gradient(145deg, #124553, #165364);
+  --glow: rgba(20, 200, 200, 0.14);
+  --shadow-sm: 0 4px 12px rgba(0,0,0,.18); --shadow-md: 0 10px 30px rgba(0,0,0,.26); --shadow-lg: 0 20px 55px rgba(0,0,0,.34);
+}
+
+[data-theme="sunset"] {
+  --primary: #ff7a45; --primary-dark: #e65f2b;
+  --primary-soft: rgba(255, 122, 69, 0.16); --primary-soft-2: rgba(255, 122, 69, 0.08);
+  --bg: #1e1024; --surface: #2d1832; --surface-soft: #36203c; --surface-muted: #422848;
+  --text: #fbe3ea; --text-strong: #fff2f5; --text-muted: #c69bb0; --text-light: #a37590;
+  --border: #4d2f55; --border-strong: #653f6e;
+  --success-soft: rgba(36, 191, 139, 0.16); --warning-soft: rgba(244, 166, 42, 0.18); --danger-soft: rgba(239, 91, 91, 0.18);
+  --sidebar-card-bg: linear-gradient(135deg, #b03a5b, #ff7a45);
+  --avatar-bg: #b03a5b; --hero-end: rgba(255, 122, 69, 0.14);
+  --btn-gradient: linear-gradient(135deg, #ff8a55, #f0553a);
+  --soft-gradient: linear-gradient(145deg, #36203c, #422848);
+  --glow: rgba(255, 122, 69, 0.14);
+  --shadow-sm: 0 4px 12px rgba(0,0,0,.2); --shadow-md: 0 10px 30px rgba(0,0,0,.28); --shadow-lg: 0 20px 55px rgba(0,0,0,.36);
+}
+
+[data-theme="forest"] {
+  --primary: #16a34a; --primary-dark: #15803d;
+  --primary-soft: #e3f6ea; --primary-soft-2: #f0faf4;
+  --bg: #f4faf6; --surface: #ffffff; --surface-soft: #f6fbf8; --surface-muted: #ecf6f0;
+  --text: #1d3b2b; --text-strong: #12301f; --text-muted: #6f8f7c; --text-light: #a4bdaf;
+  --border: #e0eee5; --border-strong: #cfe3d6;
+  --sidebar-card-bg: linear-gradient(135deg, #14532d, #1f8a4c);
+  --avatar-bg: #14532d; --hero-end: rgba(220, 244, 229, 0.9);
+  --btn-gradient: linear-gradient(135deg, #22b85a, #15803d);
+  --soft-gradient: linear-gradient(145deg, #e8f7ee, #f6fbf8);
+  --glow: rgba(22, 163, 74, 0.09);
+}
+
+[data-theme="violet"] {
+  --primary: #a855f7; --primary-dark: #9333ea;
+  --primary-soft: rgba(168, 85, 247, 0.18); --primary-soft-2: rgba(168, 85, 247, 0.09);
+  --bg: #120b2b; --surface: #1c1340; --surface-soft: #241a4f; --surface-muted: #2c2160;
+  --text: #e9defc; --text-strong: #f6f0ff; --text-muted: #ac9cd3; --text-light: #8878b4;
+  --border: #33286a; --border-strong: #45378a;
+  --success-soft: rgba(36, 191, 139, 0.16); --warning-soft: rgba(244, 166, 42, 0.16); --danger-soft: rgba(239, 91, 91, 0.18);
+  --sidebar-card-bg: linear-gradient(135deg, #5b21b6, #a855f7);
+  --avatar-bg: #5b21b6; --hero-end: rgba(168, 85, 247, 0.16);
+  --btn-gradient: linear-gradient(135deg, #b565ff, #7c3aed);
+  --soft-gradient: linear-gradient(145deg, #241a4f, #2c2160);
+  --glow: rgba(168, 85, 247, 0.18);
+  --shadow-sm: 0 4px 12px rgba(0,0,0,.2); --shadow-md: 0 10px 30px rgba(0,0,0,.3); --shadow-lg: 0 20px 55px rgba(0,0,0,.38);
+}
+
+[data-theme="amoled"] {
+  --primary: #3b9bff; --primary-dark: #1d7fe6;
+  --primary-soft: rgba(59, 155, 255, 0.16); --primary-soft-2: rgba(59, 155, 255, 0.08);
+  --bg: #000000; --surface: #0b0b0b; --surface-soft: #111111; --surface-muted: #181818;
+  --text: #e6e6e6; --text-strong: #ffffff; --text-muted: #9a9a9a; --text-light: #707070;
+  --border: #1f1f1f; --border-strong: #2e2e2e;
+  --success-soft: rgba(36, 191, 139, 0.14); --warning-soft: rgba(244, 166, 42, 0.14); --danger-soft: rgba(239, 91, 91, 0.14);
+  --sidebar-card-bg: linear-gradient(135deg, #0c2a4d, #1d5ea8);
+  --avatar-bg: #0c2a4d; --hero-end: rgba(59, 155, 255, 0.1);
+  --btn-gradient: linear-gradient(135deg, #3b9bff, #1d6fe0);
+  --soft-gradient: linear-gradient(145deg, #111111, #181818);
+  --glow: rgba(59, 155, 255, 0.08);
+  --shadow-sm: none; --shadow-md: none; --shadow-lg: none;
+}

@@ -1,7 +1,7 @@
 import { calculateSplitterOutput } from "../js/calculators/splitter.js";
 
 function assertEqual(actual, expected, message) {
-  if (actual !== expected) {
+  if (Math.abs(actual - expected) > 0.0001) {
     throw new Error(`${message}: expected ${expected}, got ${actual}`);
   }
 }

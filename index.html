@@ -12,6 +12,13 @@
     content="CalcTeamMT Pro — Toolkit kalkulator dan referensi teknisi FTTH."
   >
 
+  <script>
+    try {
+      var t = localStorage.getItem("calcteammt-pro-theme");
+      if (t) document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
+
   <title>CalcTeamMT Pro — FTTH Toolkit</title>
 
   <link rel="manifest" href="manifest.json">
@@ -131,8 +138,8 @@
           <span class="header-divider"></span>
 
           <button class="profile-trigger" data-route="settings">
-            <span class="avatar">T</span>
-            <span>Teknisi FTTH</span>
+            <span class="avatar" data-profile-initial>T</span>
+            <span data-profile-name>Teknisi FTTH</span>
             <span>⌄</span>
           </button>
         </div>
@@ -548,11 +555,35 @@
         </div>
 
         <section class="panel profile-card">
-          <span class="large-avatar">T</span>
-          <div>
-            <h2>Teknisi FTTH</h2>
-            <p>teknisi@ftth.id</p>
+          <span class="large-avatar" data-profile-initial>T</span>
+          <div class="profile-info">
+            <h2 data-profile-name>Teknisi FTTH</h2>
+            <p data-profile-division>Divisi Teknis</p>
           </div>
+          <button type="button" class="profile-edit-button" id="profile-edit-button">Ubah</button>
+        </section>
+
+        <form class="panel profile-form" id="profile-form" hidden>
+          <label>
+            <span>Nama</span>
+            <input id="profile-name-input" type="text" maxlength="40" autocomplete="name" placeholder="Nama lengkap">
+          </label>
+          <label>
+            <span>Divisi</span>
+            <input id="profile-division-input" type="text" maxlength="40" placeholder="Contoh: Maintenance, Instalasi">
+          </label>
+          <div class="profile-form-actions">
+            <button type="button" id="profile-cancel-button" class="ghost-button">Batal</button>
+            <button type="submit" class="primary-button">Simpan</button>
+          </div>
+        </form>
+
+        <section class="panel theme-panel">
+          <div class="theme-panel-head">
+            <strong>Pilihan Tampilan</strong>
+            <small>Pilih tema yang nyaman di mata</small>
+          </div>
+          <div class="theme-picker" id="theme-picker"></div>
         </section>
 
         <section class="settings-list">

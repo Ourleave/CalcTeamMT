@@ -14,6 +14,7 @@ import { showToast } from "./components/toast.js";
 import { createNavigation } from "./navigation.js";
 import { clearHistory, filterHistory, getHistory, saveHistory } from "./storage/history.js";
 import {
+  escapeHtml,
   formatDateTime,
   formatDb,
   formatDbm,
@@ -243,7 +244,7 @@ function historyRow(item) {
     <article class="history-row">
       <span class="history-dot"></span>
       <div class="history-row-main">
-        <strong>${item.title}</strong>
+        <strong>${escapeHtml(item.title)}</strong>
         <small>${formatDateTime(date)}</small>
       </div>
       <div class="history-row-result">
@@ -375,7 +376,7 @@ function renderReferenceContent(referenceId) {
         <div class="panel-heading"><h2>Sensitivitas ONT GPON</h2></div>
         <div class="loss-breakdown">
           <div><span>Terlalu kuat</span><strong class="metric-status bad">&gt; -8 dBm</strong></div>
-          <div><span>Ideal</span><strong class="metric-status normal">-10 s/d -22 dBm</strong></div>
+          <div><span>Ideal</span><strong class="metric-status normal">-8 s/d -24 dBm</strong></div>
           <div><span>Waspada</span><strong class="metric-status warning">-24 s/d -27 dBm</strong></div>
           <div><span>LOS / Drop</span><strong class="metric-status bad">&lt; -27 dBm</strong></div>
         </div>
@@ -460,27 +461,171 @@ function moveCalculatorTo(route) {
   }
 }
 
-function toggleTheme() {
-  const root = document.documentElement;
-  const current = root.getAttribute("data-theme");
-  const next = current === "dark" ? "light" : "dark";
+const THEMES = [
+  { id: "light", name: "Terang", dark: false, colors: ["#ffffff", "#1677ff", "#eaf3ff"] },
+  { id: "dark", name: "Gelap", dark: true, colors: ["#142440", "#1677ff", "#0d1a30"] },
+  { id: "ocean", name: "Samudra", dark: true, colors: ["#0f3a45", "#14c8c8", "#071f27"] },
+  { id: "sunset", name: "Senja", dark: true, colors: ["#3a1f3d", "#ff7a45", "#1e1024"] },
+  { id: "forest", name: "Hutan", dark: false, colors: ["#ffffff", "#16a34a", "#e8f7ee"] },
+  { id: "violet", name: "Ungu Neon", dark: true, colors: ["#251a4a", "#a855f7", "#120b2b"] },
+  { id: "amoled", name: "AMOLED", dark: true, colors: ["#0b0b0b", "#3b9bff", "#000000"] }
+];
 
-  root.setAttribute("data-theme", next);
-  localStorage.setItem("calcteammt-pro-theme", next);
+const THEME_KEY = "calcteammt-pro-theme";
+const PROFILE_KEY = "calcteammt-pro-profile";
+const DEFAULT_PROFILE = { name: "Teknisi FTTH", division: "Divisi Teknis" };
+
+function readStorage(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function writeStorage(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    /* penyimpanan penuh atau diblokir: abaikan */
+  }
+}
+
+function findTheme(id) {
+  return THEMES.find((theme) => theme.id === id) || THEMES[0];
+}
+
+function applyTheme(id) {
+  const theme = findTheme(id);
+
+  document.documentElement.setAttribute("data-theme", theme.id);
+  writeStorage(THEME_KEY, theme.id);
 
   const label = document.getElementById("theme-label");
-  if (label) label.textContent = next === "dark" ? "Gelap" : "Terang";
+  if (label) label.textContent = theme.name;
+
+  document
+    .querySelector('meta[name="theme-color"]')
+    ?.setAttribute("content", theme.colors[2]);
+
+  document.querySelectorAll("[data-theme-option]").forEach((button) => {
+    const active = button.dataset.themeOption === theme.id;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
+function toggleTheme() {
+  // Tombol cepat: pindah antara terang dan gelap.
+  const current = findTheme(document.documentElement.getAttribute("data-theme"));
+  applyTheme(current.dark ? "light" : "dark");
+}
+
+function renderThemePicker() {
+  const target = document.getElementById("theme-picker");
+  if (!target) return;
+
+  target.innerHTML = THEMES.map(
+    (theme) => `
+      <button type="button" class="theme-option" data-theme-option="${theme.id}" aria-pressed="false">
+        <span class="theme-swatch" style="--sw-a:${theme.colors[0]};--sw-b:${theme.colors[1]};--sw-c:${theme.colors[2]}">
+          <i></i><i></i><i></i>
+        </span>
+        <small>${theme.name}</small>
+      </button>
+    `
+  ).join("");
+
+  target.querySelectorAll("[data-theme-option]").forEach((button) => {
+    button.addEventListener("click", () => {
+      applyTheme(button.dataset.themeOption);
+      showToast(`Tampilan ${findTheme(button.dataset.themeOption).name} diterapkan.`);
+    });
+  });
 }
 
 function setupTheme() {
-  const storedTheme = localStorage.getItem("calcteammt-pro-theme") || "light";
-  document.documentElement.setAttribute("data-theme", storedTheme);
-
-  const label = document.getElementById("theme-label");
-  if (label) label.textContent = storedTheme === "dark" ? "Gelap" : "Terang";
+  renderThemePicker();
+  applyTheme(readStorage(THEME_KEY) || "light");
 
   document.getElementById("theme-toggle-mobile")?.addEventListener("click", toggleTheme);
-  document.getElementById("theme-toggle-setting")?.addEventListener("click", toggleTheme);
+  document.getElementById("theme-toggle-setting")?.addEventListener("click", () => {
+    document.getElementById("theme-picker")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+}
+
+function getProfile() {
+  try {
+    const stored = JSON.parse(readStorage(PROFILE_KEY));
+    return {
+      name: String(stored?.name || "").trim() || DEFAULT_PROFILE.name,
+      division: String(stored?.division || "").trim() || DEFAULT_PROFILE.division
+    };
+  } catch {
+    return { ...DEFAULT_PROFILE };
+  }
+}
+
+function renderProfile() {
+  const profile = getProfile();
+  const initial = profile.name.charAt(0).toUpperCase() || "T";
+
+  document.querySelectorAll("[data-profile-initial]").forEach((el) => {
+    el.textContent = initial;
+  });
+  document.querySelectorAll("[data-profile-name]").forEach((el) => {
+    el.textContent = profile.name;
+  });
+  document.querySelectorAll("[data-profile-division]").forEach((el) => {
+    el.textContent = profile.division;
+  });
+}
+
+function setupProfileEditor() {
+  const form = document.getElementById("profile-form");
+  const editButton = document.getElementById("profile-edit-button");
+  const cancelButton = document.getElementById("profile-cancel-button");
+  const nameInput = document.getElementById("profile-name-input");
+  const divisionInput = document.getElementById("profile-division-input");
+
+  if (!form || !editButton) return;
+
+  function openForm() {
+    const profile = getProfile();
+    nameInput.value = profile.name;
+    divisionInput.value = profile.division;
+    form.hidden = false;
+    editButton.hidden = true;
+    nameInput.focus();
+  }
+
+  function closeForm() {
+    form.hidden = true;
+    editButton.hidden = false;
+  }
+
+  editButton.addEventListener("click", openForm);
+  cancelButton?.addEventListener("click", closeForm);
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const name = nameInput.value.trim();
+    const division = divisionInput.value.trim();
+
+    if (!name) {
+      showToast("Nama tidak boleh kosong.");
+      nameInput.focus();
+      return;
+    }
+
+    writeStorage(PROFILE_KEY, JSON.stringify({ name, division }));
+    renderProfile();
+    closeForm();
+    showToast("Profil berhasil diperbarui.");
+  });
+
+  renderProfile();
 }
 
 function setupHistoryTabs() {
@@ -575,6 +720,7 @@ function updateHeaderDate() {
 function init() {
   populateSplitterSelect();
   setupTheme();
+  setupProfileEditor();
   setupCalculatorEvents();
   setupHistoryTabs();
   setupReferenceSearch();

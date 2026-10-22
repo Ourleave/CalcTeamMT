@@ -1,95 +1,3 @@
-export const SPLITTERS = [
-  {
-    id: "1:2",
-    label: "1:2 (3.5 dB)",
-    type: "balanced",
-    ports: 2,
-    loss: 3.5
-  },
-  {
-    id: "1:4",
-    label: "1:4 (7.2 dB)",
-    type: "balanced",
-    ports: 4,
-    loss: 7.2
-  },
-  {
-    id: "1:8",
-    label: "1:8 (10.5 dB)",
-    type: "balanced",
-    ports: 8,
-    loss: 10.5
-  },
-  {
-    id: "1:16",
-    label: "1:16 (13.8 dB)",
-    type: "balanced",
-    ports: 16,
-    loss: 13.8
-  },
-  {
-    id: "1:32",
-    label: "1:32 (17.0 dB)",
-    type: "balanced",
-    ports: 32,
-    loss: 17.0
-  },
-  {
-    id: "90:10-10",
-    label: "FBT 90:10 — Port 10% (10.5 dB)",
-    type: "unbalanced",
-    ports: 1,
-    loss: 10.5,
-    ratio: "90:10",
-    portLabel: "Port Drop 10%"
-  },
-  {
-    id: "90:10-90",
-    label: "FBT 90:10 — Port 90% (0.5 dB)",
-    type: "unbalanced",
-    ports: 1,
-    loss: 0.5,
-    ratio: "90:10",
-    portLabel: "Port Terusan 90%"
-  },
-  {
-    id: "95:5-5",
-    label: "FBT 95:5 — Port 5% (13.5 dB)",
-    type: "unbalanced",
-    ports: 1,
-    loss: 13.5,
-    ratio: "95:5",
-    portLabel: "Port Drop 5%"
-  },
-  {
-    id: "95:5-95",
-    label: "FBT 95:5 — Port 95% (0.3 dB)",
-    type: "unbalanced",
-    ports: 1,
-    loss: 0.3,
-    ratio: "95:5",
-    portLabel: "Port Terusan 95%"
-  },
-  {
-    id: "98:2-2",
-    label: "FBT 98:2 — Port 2% (17.5 dB)",
-    type: "unbalanced",
-    ports: 1,
-    loss: 17.5,
-    ratio: "98:2",
-    portLabel: "Port Drop 2%"
-  },
-  {
-    id: "98:2-98",
-    label: "FBT 98:2 — Port 98% (0.2 dB)",
-    type: "unbalanced",
-    ports: 1,
-    loss: 0.2,
-    ratio: "98:2",
-    portLabel: "Port Terusan 98%"
-  }
-];
-
 export const ONT_THRESHOLDS = {
   TOO_STRONG: -8,
   NORMAL_MIN: -24,
@@ -97,40 +5,60 @@ export const ONT_THRESHOLDS = {
 };
 
 export function getSignalStatus(power) {
-  if (power > -8) {
+  const value = Number(power);
+
+  if (value > ONT_THRESHOLDS.TOO_STRONG) {
     return {
+      key: "bad",
       level: "too-strong",
       label: "Terlalu Kuat",
+      shortLabel: "Terlalu Kuat",
       description: "Sinyal terlalu tinggi, berisiko merusak receiver ONT.",
+      recommendation:
+        "Pasang attenuator atau gunakan splitter dengan redaman lebih besar agar daya tidak melebihi -8 dBm.",
       badgeClass: "badge-danger"
     };
   }
-  if (power >= -24) {
+
+  if (value >= ONT_THRESHOLDS.NORMAL_MIN) {
     return {
+      key: "normal",
       level: "normal",
       label: "Normal / Optimal",
+      shortLabel: "Normal",
       description: "Sinyal berada dalam batas ideal layanan GPON.",
+      recommendation:
+        "Sinyal berada dalam batas ideal (-8 s/d -24 dBm). Tidak perlu tindakan.",
       badgeClass: "badge-success"
     };
   }
-  if (power >= -27) {
+
+  if (value >= ONT_THRESHOLDS.WARNING_MIN) {
     return {
+      key: "warning",
       level: "warning",
       label: "Peringatan (Margin Tipis)",
+      shortLabel: "Waspada",
       description: "Sinyal mulai melemah, mendekati batas drop.",
+      recommendation:
+        "Margin tipis. Periksa konektor, tikungan kabel, dan titik splice sebelum sinyal turun lagi.",
       badgeClass: "badge-warning"
     };
   }
+
   return {
+    key: "bad",
     level: "los",
     label: "Drop / LOS",
+    shortLabel: "Drop / LOS",
     description: "Sinyal di bawah -27 dBm, layanan berpotensi terputus.",
+    recommendation:
+      "Sinyal di bawah -27 dBm. Cek redaman jalur, bersihkan konektor, dan ulang splice yang bermasalah.",
     badgeClass: "badge-danger"
   };
 }
 
 export function getMargin(power) {
   // Margin terhadap ambang batas -27 dBm
-  const limit = -27;
-  return Number((power - limit).toFixed(2));
+  return Number((Number(power) - ONT_THRESHOLDS.WARNING_MIN).toFixed(2));
 }

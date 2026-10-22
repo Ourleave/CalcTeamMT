@@ -24,8 +24,8 @@ export function calculateSplitterOutput({
 
   const losses = {
     splitter: splitter.loss,
-    splice: safeSpliceCount * spliceLossPerPoint,
-    fiber: safeFiberLength * fiberLossPerKm,
+    splice: safeSpliceCount * nonNegative(spliceLossPerPoint, DEFAULT_SPLICE_LOSS),
+    fiber: safeFiberLength * nonNegative(fiberLossPerKm, DEFAULT_FIBER_LOSS),
     connector: safeConnectorLoss,
     other: safeOtherLoss
   };

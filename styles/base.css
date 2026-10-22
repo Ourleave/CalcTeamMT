@@ -13,7 +13,7 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(circle at 85% -10%, rgba(48, 139, 255, 0.08), transparent 28%),
+    radial-gradient(circle at 85% -10%, var(--glow), transparent 28%),
     var(--bg);
   color: var(--text);
   font-family: var(--font);

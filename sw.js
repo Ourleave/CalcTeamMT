@@ -1,4 +1,4 @@
-const CACHE_NAME = "calcteammt-pro-v4";
+const CACHE_NAME = "calcteammt-pro-v5";
 
 const APP_SHELL = [
   "./",
